@@ -1,0 +1,32 @@
+package com.mkyong.common;
+
+import org.hibernate.Session;
+import com.mkyong.persistence.HibernateUtil;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        System.out.println("Maven + Hibernate + MySQL");
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        session.beginTransaction();
+        Stock stock = new Stock();
+        
+        stock.setStockCode("4720");
+        stock.setStockName("sss");
+        
+        Stock stock2 = new Stock();
+        
+        stock2.setStockCode("4721");
+        stock2.setStockName("ddd");
+        
+        session.save(stock);
+        session.save(stock2);
+       session.getTransaction().commit();
+       
+       session.close();
+       HibernateUtil.shutdown();
+        
+    }
+}
